@@ -5,7 +5,7 @@ const { WindowContext } = require('../main')
 const { ItemGrid, ItemTable } = require('../item')
 const { ProjectSidebar } = require('./sidebar')
 const { ProjectToolbar } = require('./toolbar')
-const { blank, pick } = require('../../common/util')
+const { pick } = require('../../common/util')
 const { array, bool, func, object, number } = require('prop-types')
 const { ITEM } = require('../../constants/sass')
 
@@ -127,7 +127,6 @@ class ProjectView extends React.Component {
     offset: number.isRequired,
     photos: object.isRequired,
     tags: object.isRequired,
-    dt: func.isRequired,
     zoom: number.isRequired,
     onItemCreate: func.isRequired,
     onItemImport: func.isRequired,
