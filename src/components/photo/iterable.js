@@ -108,7 +108,8 @@ class PhotoIterable extends React.PureComponent {
 
 
   static DragSourceSpec = {
-    beginDrag({ photo, getAdjacent }) {
+    beginDrag({ photo, getAdjacent, onDragStart }) {
+      if (onDragStart) onDragStart()
       return {
         id: photo.id,
         item: photo.item,
@@ -125,9 +126,9 @@ class PhotoIterable extends React.PureComponent {
       return !isDisabled
     },
 
-    endDrag({ onDropPhoto }, monitor) {
+    endDrag({ onDropPhoto, onDragStop }, monitor) {
       const result = monitor.didDrop() && monitor.getDropResult()
-
+      if (onDragStop) onDragStop()
       if (!result) return
       if (result.id === result.to) return
       if (result.offset == null) return
@@ -215,6 +216,8 @@ class PhotoIterable extends React.PureComponent {
     dt: func.isRequired,
     dp: func.isRequired,
     getAdjacent: func.isRequired,
+    onDragStart: func.isRequired,
+    onDragStop: func.isRequired,
     onContextMenu: func.isRequired,
     onContract: func.isRequired,
     onDropPhoto: func.isRequired,
